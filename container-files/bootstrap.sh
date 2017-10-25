@@ -18,6 +18,21 @@ log() {
   else echo; fi
 }
 
+#######################################
+# Add custom config 
+#######################################
+echo "### Adding custom config ###" > /etc/snmp/snmpd.conf
+echo "com2sec localhost 127.0.0.1       private" > /etc/snmp/snmpd.conf
+echo "" > /etc/snmp/snmpd.conf
+echo "group MyRWGroup	v1         localhost" > /etc/snmp/snmpd.conf
+echo "group MyRWGroup	v2c        localhost" > /etc/snmp/snmpd.conf
+echo "group MyRWGroup	usm        localhost" > /etc/snmp/snmpd.conf
+echo "" > /etc/snmp/snmpd.conf
+echo "access MyRWGroup ""      any       noauth    exact  all    all    none" > /etc/snmp/snmpd.conf
+echo "" > /etc/snmp/snmpd.conf
+echo "rwcommunity private localhost" > /etc/snmp/snmpd.conf
+echo "### Custom config ###" > /etc/snmp/snmpd.conf
+
 # Launch
 log $RUN_CMD
 $RUN_CMD
